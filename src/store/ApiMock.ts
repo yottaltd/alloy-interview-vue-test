@@ -1,6 +1,6 @@
 import { CharacterModel } from '@/models/CharacterModel'
-import { SpeedTrait } from '@/models/SpeedTrait'
-import { StrengthTrait } from '@/models/StrengthTrait'
+import { SpeedTraitModel } from '@/models/SpeedTraitModel'
+import { StrengthTraitModel } from '@/models/StrengthTraitModel'
 import { TraitTypeModel } from '@/models/TraitTypeModel'
 
 export class ApiMock {
@@ -14,11 +14,11 @@ export class ApiMock {
 }
 
 function createCharacterSaitama (): CharacterModel {
-  const speedTrait: SpeedTrait = {
+  const speedTrait: SpeedTraitModel = {
     type: TraitTypeModel.Speed,
-    value: 'speed of sound'
+    value: 'speed of light'
   }
-  const strengthTrait: StrengthTrait = {
+  const strengthTrait: StrengthTraitModel = {
     type: TraitTypeModel.Strength,
     value: 'super strong'
   }
@@ -32,11 +32,11 @@ function createCharacterSaitama (): CharacterModel {
 }
 
 function createCharacterGenos (): CharacterModel {
-  const speedTrait: SpeedTrait = {
+  const speedTrait: SpeedTraitModel = {
     type: TraitTypeModel.Speed,
     value: 'speed of sound'
   }
-  const strengthTrait: StrengthTrait = {
+  const strengthTrait: StrengthTraitModel = {
     type: TraitTypeModel.Strength,
     value: 'super strong'
   }
@@ -50,11 +50,11 @@ function createCharacterGenos (): CharacterModel {
 }
 
 function createCharacterMumen (): CharacterModel {
-  const speedTrait: SpeedTrait = {
+  const speedTrait: SpeedTraitModel = {
     type: TraitTypeModel.Speed,
     value: 'goat'
   }
-  const strengthTrait: StrengthTrait = {
+  const strengthTrait: StrengthTraitModel = {
     type: TraitTypeModel.Strength,
     value: 'weak'
   }

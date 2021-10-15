@@ -4,7 +4,7 @@ import { TraitTypeModel } from './TraitTypeModel'
 /**
  * the trait of strength
  */
-export interface StrengthTrait extends TraitModel {
+export interface StrengthTraitModel extends TraitModel {
   type: TraitTypeModel.Strength;
 
   /**

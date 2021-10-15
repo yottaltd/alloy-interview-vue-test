@@ -33,7 +33,7 @@
     "src/**/*.vue",
     "tests/**/*.ts",
     "tests/**/*.tsx"
-  ],
+, "tests/e2e/specs/CharacterView.spec.ts"  ],
   "exclude": [
     "node_modules"
   ]

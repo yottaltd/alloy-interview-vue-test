@@ -4,7 +4,7 @@ import { TraitTypeModel } from './TraitTypeModel'
 /**
  * the trait of speed
  */
-export interface SpeedTrait extends TraitModel {
+export interface SpeedTraitModel extends TraitModel {
   type: TraitTypeModel.Speed;
 
   /**

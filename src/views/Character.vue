@@ -2,6 +2,7 @@
   <div class="character">
     <LabelText label="ID" :text="routeId" />
     <LabelText v-if="name" label="Name" :text="name" />
+    <LabelText v-if="power" label="Power" :text="power" />
     <LabelImage v-if="image" label="Image" :image="image" />
     <Trait v-for="trait in traits" :key="JSON.stringify(trait)" :trait="trait" />
   </div>
@@ -14,6 +15,7 @@ import Trait from '@/components/Trait.vue'
 import { CharacterModel } from '@/models/CharacterModel'
 import { TraitModel } from '@/models/TraitModel'
 import { StateModel } from '@/store/StateModel'
+import { CharacterPowerCalculator } from '@/utils/CharacterPowerCalculator'
 import { computed, ComputedRef, defineComponent } from 'vue'
 import { useRoute } from 'vue-router'
 import { useStore } from 'vuex'
@@ -24,6 +26,7 @@ export default defineComponent({
   setup () {
     const route = useRoute()
     const store = useStore<StateModel>()
+    const calculator = new CharacterPowerCalculator()
 
     const routeId: ComputedRef<string> = computed(() =>
       Array.isArray(route.params.id)
@@ -36,10 +39,14 @@ export default defineComponent({
     const name: ComputedRef<string | null> = computed(() => character.value?.name || null)
     const image: ComputedRef<string | null> = computed(() => character.value?.image || null)
     const traits: ComputedRef<TraitModel[]> = computed(() => character.value?.traits || [])
+    const power: ComputedRef<string | null> = computed(() =>
+      character.value ? calculator.calculate(character.value).toString() : null
+    )
 
     return {
       routeId,
       name,
+      power,
       image,
       traits
     }
