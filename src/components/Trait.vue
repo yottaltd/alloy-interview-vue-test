@@ -1,11 +1,6 @@
 <template>
-  <LabelText class="trait" v-if="strengthValue" label="Strength" :text="strengthValue" />
-  <div class="trait" v-else-if="speedValue">
-    <p>Speed</p>
-    <div class="speed" >
-      <div :style="speedValue"/>
-    </div>
-  </div>
+  <LabelText  v-if="strengthValue" label="Strength" :text="strengthValue" />
+  <LabelColouredBar  v-else-if="speedValue" label="Speed" :activeBarWidth="speedValue" />
 </template>
 
 <script lang="ts">
@@ -16,10 +11,11 @@ import { TraitGuards } from '@/utils/TraitGuards'
 import { computed, ComputedRef, defineComponent, PropType } from 'vue'
 import LabelText from '@/components/LabelText.vue'
 import { SpeedValueType } from '@/models/SpeedValueType'
+import LabelColouredBar from '@/components/LabelColouredBar.vue'
 
 export default defineComponent({
   name: 'Trait',
-  components: { LabelText },
+  components: { LabelText, LabelColouredBar },
   props: {
     trait: {
       type: Object as PropType<TraitModel>,
@@ -27,7 +23,7 @@ export default defineComponent({
     }
   },
   setup (props) {
-    const strengthValue: ComputedRef<string | undefined> = computed(() => {
+    const strengthValue: ComputedRef<string | null> = computed(() => {
       if (TraitGuards.isTraitStrengthGuard(props.trait)) {
         switch (props.trait.value) {
           case StrengthValueType.Weak:
@@ -38,37 +34,25 @@ export default defineComponent({
             return '💪💪💪'
         }
       }
-      return undefined
+      return null
     })
 
-    const speedValue: ComputedRef<Record<string, string> | undefined> = computed(() => {
+    const speedValue: ComputedRef<string | null> = computed(() => {
       if (TraitGuards.isTraitSpeedGuard(props.trait)) {
-        let width = ''
         switch (props.trait.value) {
           case SpeedValueType.Tortoise:
-            width = '10%'
-            break
+            return '10%'
           case SpeedValueType.Goat:
-            width = '30%'
-            break
+            return '30%'
           case SpeedValueType.SpeedOfLight:
-            width = '60%'
-            break
+            return '60%'
           case SpeedValueType.SpeedOfSound:
-            width = '100%'
-            break
+            return '100%'
           default:
             throw Error('unknown speed value type')
         }
-
-        return {
-          width,
-          float: 'left',
-          backgroundColor: 'red',
-          height: '100%'
-        }
       }
-      return undefined
+      return null
     })
 
     return {
@@ -78,15 +62,3 @@ export default defineComponent({
   }
 })
 </script>
-<style lang="less">
-.trait {
-  display: block;
-  margin-bottom:10px;
-}
-.speed {
-  width: 100%;
-  display: block;
-  background-color: green;
-  height: 40px;
-}
-</style>

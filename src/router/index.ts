@@ -18,7 +18,8 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('@/components/PageNotFound.vue')
   },
   {
-    path: '/:catchAll(.*)', redirect: '/404'
+    path: '/:catchAll(.*)',
+    redirect: '/404'
   }
 ]
 
