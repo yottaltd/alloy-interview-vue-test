@@ -11,6 +11,15 @@ const routes: Array<RouteRecordRaw> = [
     path: '/character/:id',
     name: 'Character',
     component: () => import('@/views/Character.vue')
+  },
+  {
+    path: '/404',
+    name: 'NotFound',
+    component: () => import('@/components/PageNotFound.vue')
+  },
+  {
+    path: '/:catchAll(.*)',
+    redirect: '/404'
   }
 ]
 
